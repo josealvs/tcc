@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/Logo - 2.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Professor</title>
+</head>
+<body>
+    <header>
+        <img id="logo-header" src="{% static 'images/Logo Horizontal - 2.svg' %}" alt="Logo Horizontal">
+        <nav>
+            <ul class="nav_links">
+                <li><a href = "{% url 'index' %}">Início</a></li>
+                <li><a href="#">Minha Conta</a></li>
+            </ul>
+        </nav>
+        <div class="user">
+            <span>Bem-vindo {{request.user}}</span>
+        </div>
+        <div id="linha-vertical"></div>
+        <a class=login href="{% url 'logout' %}"><button id="button-1">Sair</button></a>
+
+    </header>
+    <main class="main_professores">
+        <div class="div-container">
+            <h1 id="projetos">Meus Projetos</h1>
+            {% for projetoo in projeto %}
+            <section>
+                <a href="{% url 'projeto' projetoo.id %}"><span>{{projetoo.titulo}}</span></a>
+                <a href = "{% url 'editar_projeto' projetoo.id %}"><button id = "button-1">Editar</button></a>
+            </section>
+            {% endfor %}
+            <a href = "{% url 'cadastrar_projeto' %}"><button>Novo Projeto</button></a>
+        </div>
+    </main>
+    <footer>
+        <img id="logo-footer" src="{% static 'images/Logo Nome - 5.svg' %}" alt="logo">
+        <div id="linha-vertical"></div>
+        <a id="credits">©Project Manager - 2022</a>
+    </footer>
+</body>
+</html>

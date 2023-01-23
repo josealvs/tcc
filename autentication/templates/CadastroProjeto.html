@@ -1,0 +1,58 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/Logo - 2.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <title>Aluno</title>
+</head>
+<body>
+    <header>
+        <img id="logo-header" src="{% static 'images/Logo Horizontal - 2.svg' %}" alt="Logo Horizontal">
+        <a class=login href="#"><button id="button-1">Projetos</button></a>
+        <nav>
+            <ul class="nav_links">
+                <li><a href = "{% url 'index' %}">Início</a></li>
+                <li><a href="#">Minha Conta</a></li>
+            </ul>
+        </nav>
+        <div class="user">
+            <span>Bem-vindo {{request.user}}</span>
+        </div>
+        <div id="linha-vertical"></div>
+        <a class=login href="{% url 'logout' %}"><button id="button-1">Sair</button></a>
+
+    </header>
+    <main>
+        <container class="alunos-main2">
+            <h1 id="alunos">Cadastro de Projetos</h1>
+            <div class="inf-tudo">
+                <div class="inf-main3">
+                    <span>Informações do projeto:</span>
+                    <form method = "POST">
+                        {% csrf_token %}
+                        {{ form.titulo|as_crispy_field }}
+                        {{ form.descricao|as_crispy_field }}
+                        {{ form.data_inicio|as_crispy_field }}
+                        {{ form.aluno|as_crispy_field }}
+                    <input type = "submit" id="button-2" placeholder="Cadastrar Projeto">
+                    </form>  
+                </div>
+            </div>
+        </container>
+    </main>
+    <footer>
+        <img id="logo-footer" src="{% static 'images/Logo Nome - 5.svg' %}" alt="logo">
+        <div id="linha-vertical"></div>
+        <a id="credits">©Project Manager - 2022</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

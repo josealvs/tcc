@@ -1,0 +1,58 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load permission_tags %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/Logo - 2.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Aluno</title>
+</head>
+<body>
+    <header>
+        <img id="logo-header" src="{% static 'images/Logo Horizontal - 2.svg' %}" alt="Logo Horizontal">
+        <nav>
+            <ul class="nav_links">
+                <li><a href = "{% url 'index' %}">Início</a></li>
+                {% if request.user|has_role:'professor' %}
+                    <li><a href="{% url 'inicialprofessor' %}">Meus Projetos</a></li>
+                {% else %}
+                    <li><a href="{% url 'inicialaluno' %}">Meus Projetos</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="user">
+            <span>Bem-vindo {{request.user}}</span>
+        </div>
+        <div id="linha-vertical"></div>
+        <a class=login href="{% url 'logout' %}"><button id="button-1">Sair</button></a>
+
+    </header>
+    <main>
+        <container class="alunos-main">
+            <h1 id="alunos">{{projeto.titulo}}</h1>
+           
+            <div class="inf-tudo">
+                <div class = "inf-main3">         
+                    <div class="div-main3">
+                        <form method="post"class = "div-main3">
+                            {% csrf_token %}
+                            <h1>Deseja excluir o projeto "{{ projeto.titulo }}"?</h1>
+                            <button id="button-1">Excluir Projeto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </container>
+    </main>
+    <footer>
+        <img id="logo-footer" src="{% static 'images/Logo Nome - 5.svg' %}" alt="logo">
+        <div id="linha-vertical"></div>
+        <a id="credits">©Project Manager - 2022</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/Logo - 2.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Aluno</title>
+</head>
+<body>
+    <header>
+        <img id="logo-header" src="{% static 'images/Logo Horizontal - 2.svg' %}" alt="Logo Horizontal">
+        <nav>
+            <ul class="nav_links">
+                <li><a href = "{% url 'index' %}">Início</a></li>
+                <li><a href="#">Minha Conta</a></li>
+            </ul>
+        </nav>
+        <div class="user">
+            <span>Bem-vindo {{request.user}}</span>
+        </div>
+        <div id="linha-vertical"></div>
+        <a class=login href="{% url 'logout' %}"><button id="button-1">Sair</button></a>
+
+    </header>
+      
+    <main class="alunos-main">
+        {% for projetoo in projeto %}
+        <div class="container-alunos">         
+            <div class="title-alunos">
+                
+                <a href="{% url 'projeto' projetoo.id %}"><h1>{{projetoo.titulo}}</h1></a>
+            </div>
+            <div class="tarefas-geral">
+                <table>
+                    <tr>
+                        <th>Tarefas Concluidas</th>
+                        <th>Tarefas Totais</th>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>29</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="crud-tarefas">
+                <span>Tarefas</span>
+                <div class="taf">
+                    <table class="tarefas">
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Tarefa</th>
+                            <th>Situação</th>
+                        </tr>
+                        {% for atividades in atividade %}
+                        <tbody>
+                            <tr>
+                        
+                                <td>{{atividades.aluno}}</td>
+                                <td>{{atividades.descricao}}</td>
+                                <td>{{atividades.status}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                        {% endfor %}
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+    
+    <footer>
+        <img id="logo-footer" src="{% static 'images/Logo Nome - 5.svg' %}" alt="logo">
+        <div id="linha-vertical"></div>
+        <a id="credits">©Project Manager - 2022</a>
+    </footer>
+</body>
+</html>
